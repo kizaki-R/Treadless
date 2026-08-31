@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 品牌圖示的湖水綠（取樣自滿版出血母檔頂緣），
+         只在遮罩外／視差縮放時露出，要跟前景圖的底色無縫 -->
+    <color name="ic_launcher_background">#A7E2D4</color>
+</resources>

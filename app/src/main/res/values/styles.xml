@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- v27 專屬屬性（windowLightNavigationBar/cutoutMode）在 values-v27 覆寫版；
+         API 26 沒有瀏海也沒有導航列亮色 API，缺這兩項無感 -->
+    <style name="Theme.Treadless" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

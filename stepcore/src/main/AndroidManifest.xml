@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  步行工具引擎的 manifest 片段。宿主 App（:app / :stepapp）只要依賴 :stepcore，
+  下列權限、queries 與服務宣告都會被 manifest merger 併進去，不必各寫一份。
+
+  宿主自己要負責的（因為要指向自家 MainActivity）：
+    - SHOW_PERMISSIONS_RATIONALE 的 intent-filter
+    - ViewPermissionUsageActivity 的 activity-alias
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <!-- 寫入 Health Connect -->
+    <uses-permission android:name="android.permission.health.WRITE_STEPS" />
+    <uses-permission android:name="android.permission.health.WRITE_DISTANCE" />
+
+    <!-- 查詢 / 開啟 Health Connect，以及「寫完切回的 App」選擇器要列出所有可啟動的 App
+         （Android 11+ 套件可見性：沒有這個 LAUNCHER intent query，queryIntentActivities
+         只看得到自己） -->
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+        <intent>
+            <action android:name="androidx.health.connect.action.SHOW_PERMISSIONS_RATIONALE" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+    <application>
+        <!-- specialUse：dataSync 型別在 Android 15+ 有 24 小時內共 6 小時的硬上限，
+             整晚掛機會被系統收掉；specialUse 無此限制（側載 App 不經商店審查） -->
+        <service
+            android:name="com.kizakiworks.stepcore.StepTestService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="continuous simulated step writing for long-running walk testing sessions" />
+        </service>
+    </application>
+</manifest>

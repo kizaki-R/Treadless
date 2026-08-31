@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notif_channel_name">Step writing</string>
+    <string name="notif_channel_desc">Writes steps to Health Connect</string>
+    <string name="notif_title_running">Treadless is running</string>
+    <string name="notif_title">Treadless</string>
+    <string name="notif_stopped_timeout">System time limit reached — step writing has stopped</string>
+    <string name="notif_action_stop">Stop</string>
+    <string name="notif_part_session">%1$,d steps this session</string>
+    <string name="notif_part_failed">last write failed</string>
+    <string name="notif_countdown_write">next write in %1$d s</string>
+    <string name="notif_writing">writing…</string>
+</resources>

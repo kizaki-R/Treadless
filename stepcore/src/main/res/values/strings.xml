@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- :stepcore 的使用者可見字串（前景服務通知）。預設＝繁體中文。 -->
+<resources>
+    <string name="notif_channel_name">步行測試工具</string>
+    <string name="notif_channel_desc">寫入步數到 Health Connect</string>
+    <string name="notif_title_running">步行測試工具進行中</string>
+    <string name="notif_title">步行測試工具</string>
+    <string name="notif_stopped_timeout">已達系統前景服務時限，步行測試工具已停止</string>
+    <string name="notif_action_stop">停止</string>
+    <string name="notif_part_session">本次 %1$,d 步</string>
+    <string name="notif_part_failed">上次寫入失敗</string>
+    <string name="notif_countdown_write">%1$d 秒後寫入</string>
+    <string name="notif_writing">寫入中</string>
+</resources>

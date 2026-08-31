@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 英文文案原則：日常口語、句子式標籤（同 Also write distance 的節奏）、
+     不用生硬的直譯詞（Auto jump／Earlier／Later 都被使用者退過件）。
+
+     以下為 2026-08-31 英文審校（外部老師）定案的語感規則，新增字串照這套走：
+     1. 權限：用 access / granted / write access；不要用 authorized / not authorized。
+     2. 倒數：一律 Next write / next write in …；不要 writing in …。
+     3. 系統限制：用 Android may stop / interrupted / background writes；不要 frozen。
+     4. 核心動詞維持 write / writing（不改成 add steps）。
+     5. 模式名稱大小寫固定 Auto mode / Manual mode；模式條的 Auto / Manual 維持單字。
+     6. 單位格式：100/min、60 s、0.72 m、100 steps/min（斜線前後不留空格）。
+     7. 品牌名優先於 this app（Treadless never reads your data）。
+     8. placeholder（%1$,d、%1$s、%2$s…）只能移動位置，不可增刪。
+     9. 自動跳轉一族統一用 open，不要 switch：Open app after writing／Opens %2$s %1$s s after…／
+        Choose an app／Delay before opening。
+     10. 開關底下的設定列脈絡已足，標籤盡量短（App／Delay）；彈窗標題另存一條寫完整。
+     11. 不誇大功效：這支是代寫步數的工具，別用 smart／effortless fitness 這類
+         暗示「聰明地運動」的字（tagline 的 smart way 就是為此改成 easy way）。 -->
+<resources>
+    <string name="app_name">Treadless</string>
+    <string name="developer_name">Kizaki Works</string>
+
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_close">Close</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_skip">Skip</string>
+    <string name="action_later">Maybe later</string>
+    <string name="action_write">Write</string>
+
+    <string name="status_manual">Manual mode</string>
+    <string name="status_running">Writing</string>
+    <string name="status_stopped">Stopped</string>
+    <string name="today_total">Steps written today</string>
+    <string name="cd_reset_today">Reset today\'s total</string>
+    <string name="cd_language">Language</string>
+    <string name="stat_last_amount">Last batch</string>
+    <string name="stat_rate">Rate</string>
+    <string name="stat_next_write">Next write</string>
+    <string name="stat_last_write">Last write</string>
+    <string name="fmt_steps">%1$,d steps</string>
+    <string name="fmt_rate">%1$,d/min</string>
+    <string name="fmt_seconds_short">%1$d s</string>
+    <string name="time_sec_ago">%1$d s ago</string>
+    <string name="time_min_ago">%1$d min ago</string>
+    <string name="time_hour_ago">%1$d h ago</string>
+
+    <string name="hc_not_installed">Health Connect not installed</string>
+    <string name="hc_not_granted">Health Connect access not granted</string>
+    <string name="btn_install_hc">Install Health Connect</string>
+    <string name="btn_grant">Grant access</string>
+    <string name="btn_stop">Stop</string>
+    <string name="btn_start_auto">Start auto-writing</string>
+
+    <string name="setup_title">Finish setup</string>
+    <string name="setup_hc_update">Update Health Connect — tap to open</string>
+    <string name="setup_hc_install">Health Connect is not installed — tap to install</string>
+    <string name="setup_hc_grant">Write access not granted — tap to allow Treadless to write steps</string>
+    <string name="setup_distance">Distance is enabled, but access isn\'t granted — only steps will be written</string>
+    <string name="setup_notif">Notifications are off — you won\'t see progress, and Android may stop the service</string>
+    <string name="setup_battery">Battery usage isn\'t set to Unrestricted — long sessions may be interrupted</string>
+
+    <string name="card_write_settings">Writing settings</string>
+    <string name="row_rate">Steps per minute</string>
+    <string name="row_interval">Write interval</string>
+    <string name="row_distance">Also write distance</string>
+    <string name="row_stride">Stride length</string>
+    <string name="cd_stride">Set stride length</string>
+    <string name="fmt_stride">%1$.2f m</string>
+    <string name="hint_hourly_with_km">≈ %1$,d steps and %2$.1f km per hour. Stride length affects only distance records, not step counts.</string>
+    <string name="hint_hourly">≈ %1$,d steps per hour.</string>
+    <string name="hint_battery_home">For long sessions, set battery usage to Unrestricted to help prevent Android from stopping background writes.</string>
+
+    <string name="card_other">Settings</string>
+    <string name="row_confirm">Confirm before writing</string>
+    <string name="row_confirm_sub">Shows the step count and asks for confirmation before writing</string>
+    <string name="row_autojump">Open app after writing</string>
+    <string name="row_autojump_sub">Opens %2$s %1$s s after a successful write</string>
+    <string name="row_jump_target">App</string>
+    <string name="row_jump_delay">Delay</string>
+    <!-- 彈窗標題與設定列標籤分開存：列有開關當脈絡可以很短，彈窗要能獨立看懂 -->
+    <string name="dlg_jump_target">Choose an app</string>
+    <string name="dlg_jump_delay">Delay before opening</string>
+    <string name="fmt_delay_sec">%1$s s</string>
+    <string name="hint_write_rate_limit">At most one write per second — leave a 1-second gap between taps.</string>
+    <string name="cd_collapse">Collapse</string>
+    <string name="cd_expand">Expand</string>
+
+    <string name="msg_written">Wrote %1$,d steps over %2$d s</string>
+    <string name="msg_too_soon">Too soon — wait a second and try again</string>
+    <string name="msg_hc_unavailable">Health Connect unavailable</string>
+    <string name="msg_no_permission">Write permission not granted</string>
+    <string name="msg_failed">Write failed: %1$s</string>
+    <string name="msg_unknown_error">unknown error</string>
+
+    <string name="confirm_title">Confirm write</string>
+    <string name="confirm_body">Writes to Health Connect can\'t be undone from Treadless. You can turn off this confirmation in Settings.</string>
+
+    <string name="dlg_rate_desc">Set how many steps to write per minute. A typical walking pace is about 100 steps/min; brisk walking is about 130. Unusually high values may violate a game\'s or platform\'s terms of use — use at your own risk.</string>
+    <string name="unit_rate">steps/min</string>
+    <string name="dlg_interval_desc">Writing every %1$d seconds to once a minute is usually enough — games don\'t read Health Connect continuously. (%1$d–3600 s)</string>
+    <string name="unit_seconds">s</string>
+    <string name="dlg_stride_desc">Distance per step (0.30–1.50 m), used for distance records. The average adult stride is about 0.72 m.</string>
+    <string name="unit_meters">m</string>
+    <string name="dlg_delay_desc">How long to wait after a successful write before opening the app.</string>
+
+    <string name="dlg_language">Language</string>
+    <string name="lang_zh">繁體中文</string>
+    <string name="lang_en">English</string>
+
+    <string name="picker_search">Search</string>
+    <string name="picker_search_hint">App name</string>
+    <string name="picker_loading">Loading apps…</string>
+    <string name="picker_empty">No matching apps</string>
+    <string name="picker_none">None</string>
+
+    <string name="cd_edit_group">Edit group</string>
+    <string name="cd_sort_order">Toggle sort order</string>
+    <string name="cd_add_group">Add group</string>
+    <string name="dlg_group_title">Edit group</string>
+    <string name="group_name_label">Group name</string>
+    <string name="group_name_hint">Up to 4 characters</string>
+    <string name="group_order">Group order</string>
+    <string name="group_move_left">◀ Move left</string>
+    <string name="group_move_right">Move right ▶</string>
+    <string name="group_steps_label">Steps</string>
+    <string name="sort_asc">Low to high ↑</string>
+    <string name="sort_desc">High to low ↓</string>
+    <string name="group_fill_hint">Each value you enter becomes a quick button (up to %1$d). Blank fields are ignored.</string>
+    <string name="value_empty_hint">Leave blank</string>
+    <string name="group_delete">Delete group</string>
+    <string name="group_default_new">Group %1$d</string>
+
+    <string name="mode_auto">Auto</string>
+    <string name="mode_manual">Manual</string>
+
+    <string name="ob_welcome_sub">Life gets busy.\nLet your steps add up the easy way.</string>
+    <string name="ob_modes_title">Two ways to write steps</string>
+    <string name="ob_mode_auto">Auto mode</string>
+    <string name="ob_mode_auto_sub">Set a rate and interval, and Treadless writes steps automatically.</string>
+    <string name="ob_mode_manual">Manual mode</string>
+    <string name="ob_mode_manual_sub">Write any amount with one tap.</string>
+    <string name="ob_hc_title">Set up Health Connect</string>
+    <string name="ob_hc_granted">Write access granted — you\'re all set.</string>
+    <!-- 這句不放手動 \n：審校後句子變長，硬斷會擠出一行特別短的「Steps and Distance,」，
+         交給自然折行比較勻（中文版短，\n 仍然落在自然的分句處，維持原樣）。 -->
+    <string name="ob_hc_sub">On the permission screen, allow Treadless to write Steps and Distance, as shown below. Treadless never reads your data.</string>
+    <string name="ob_hc_card_title">Allow Treadless to write</string>
+    <string name="ob_perm_steps">Steps</string>
+    <string name="ob_perm_distance">Distance</string>
+    <string name="ob_perm_allowed">Allowed</string>
+    <string name="ob_hc_grant_btn">Open Health Connect</string>
+    <string name="ob_notif_title">See progress in real time</string>
+    <string name="ob_notif_granted">Notifications are on — you can now see live write progress.</string>
+    <string name="ob_notif_sub">Allow notifications to see live progress and countdowns in Auto mode.</string>
+    <string name="ob_notif_mock_title">Treadless · Writing</string>
+    <string name="ob_notif_mock_body">3,000 steps today · next write in 42 s</string>
+    <string name="ob_notif_stop">Stop</string>
+    <string name="ob_notif_allow">Allow notifications</string>
+    <string name="ob_battery_title">Uninterrupted writing</string>
+    <string name="ob_battery_done">Battery usage is set to Unrestricted.</string>
+    <string name="ob_battery_sub">For Auto mode, set battery usage to Unrestricted.</string>
+    <string name="ob_battery_card">Battery usage</string>
+    <string name="ob_battery_unrestricted">Unrestricted</string>
+    <string name="ob_battery_optimized">Optimized</string>
+    <string name="ob_battery_restricted">Restricted</string>
+    <string name="ob_battery_btn">Open battery settings</string>
+    <string name="ob_start">Get started</string>
+    <string name="ob_start_anyway">Start anyway</string>
+</resources>

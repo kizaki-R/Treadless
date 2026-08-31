@@ -1,0 +1,37 @@
+﻿# Android / Gradle build outputs
+build/
+.gradle/
+app/build/
+*/build/
+
+# Local config (contains SDK path, do not commit)
+local.properties
+
+# IntelliJ / Android Studio
+*.iml
+.idea/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
+
+# Android Keystore (never commit signing keys)
+*.jks
+*.keystore
+keystore.properties
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp / scratch dirs created by Chrome automation
+tmp-chrome-video-profile*/
+
+# Proguard / R8 mapping
+captures/
+*.hprof
+
+video_frames/

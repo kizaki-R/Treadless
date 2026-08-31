@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 預設語言＝繁體中文（既有使用者）；英文在 values-en/。 -->
+<resources>
+    <string name="app_name">Treadless</string>
+    <string name="developer_name">Kizaki Works</string>
+
+    <!-- 通用動作 -->
+    <string name="action_cancel">取消</string>
+    <string name="action_save">儲存</string>
+    <string name="action_close">關閉</string>
+    <string name="action_continue">繼續</string>
+    <string name="action_skip">略過</string>
+    <string name="action_later">稍後再說</string>
+    <string name="action_write">寫入</string>
+
+    <!-- hero 卡 -->
+    <string name="status_manual">手動模式</string>
+    <string name="status_running">寫入中</string>
+    <string name="status_stopped">已停止</string>
+    <string name="today_total">今日累計寫入</string>
+    <string name="cd_reset_today">今日累計歸零</string>
+    <string name="cd_language">介面語言</string>
+    <string name="stat_last_amount">上次寫入量</string>
+    <string name="stat_rate">速率</string>
+    <string name="stat_next_write">下次寫入</string>
+    <string name="stat_last_write">上次寫入</string>
+    <string name="fmt_steps">%1$,d 步</string>
+    <string name="fmt_rate">%1$,d 步/分</string>
+    <string name="fmt_seconds_short">%1$d 秒</string>
+    <string name="time_sec_ago">%1$d 秒前</string>
+    <string name="time_min_ago">%1$d 分前</string>
+    <string name="time_hour_ago">%1$d 小時前</string>
+
+    <!-- Health Connect 晶片與主按鈕 -->
+    <string name="hc_not_installed">Health Connect 未安裝</string>
+    <string name="hc_not_granted">Health Connect 未授權</string>
+    <string name="btn_install_hc">安裝 Health Connect</string>
+    <string name="btn_grant">前往授權</string>
+    <string name="btn_stop">停止寫入</string>
+    <string name="btn_start_auto">開始自動寫入</string>
+
+    <!-- 尚待設定 -->
+    <string name="setup_title">尚待設定</string>
+    <string name="setup_hc_update">Health Connect 需更新，點此前往</string>
+    <string name="setup_hc_install">尚未安裝 Health Connect，點此安裝</string>
+    <string name="setup_hc_grant">尚未授權，點此開 Health Connect 允許 Treadless 寫入步數</string>
+    <string name="setup_distance">已開啟距離記錄但未授權距離寫入，目前只會寫步數</string>
+    <string name="setup_notif">尚未允許通知，掛機時看不到進度也容易被系統收掉</string>
+    <string name="setup_battery">電池用量未設為「無限制」，長時間掛機會被凍結</string>
+
+    <!-- 寫入設定卡 -->
+    <string name="card_write_settings">寫入設定</string>
+    <string name="row_rate">每分鐘步數</string>
+    <string name="row_interval">寫入間隔</string>
+    <string name="row_distance">同步寫入距離</string>
+    <string name="row_stride">步長</string>
+    <string name="cd_stride">設定步長</string>
+    <string name="fmt_stride">%1$.2f 公尺</string>
+    <string name="hint_hourly_with_km">換算後約每小時 %1$,d 步、%2$.1f 公里。步長只影響一併寫入的距離資料，不影響步數。</string>
+    <string name="hint_hourly">換算後約每小時 %1$,d 步。</string>
+    <string name="hint_battery_home">長時間掛機請把本 App 的電池用量設為「無限制」，避免寫入被系統凍結。</string>
+
+    <!-- 其他設定卡 -->
+    <string name="card_other">其他設定</string>
+    <string name="row_confirm">寫入前確認</string>
+    <string name="row_confirm_sub">點快捷鍵先顯示步數，確認後才寫入</string>
+    <string name="row_autojump">自動跳轉</string>
+    <string name="row_autojump_sub">寫入成功 %1$s 秒後切回 %2$s</string>
+    <string name="row_jump_target">跳轉目的地</string>
+    <string name="row_jump_delay">跳轉延遲</string>
+    <!-- 彈窗標題與設定列標籤分開存：列有開關當脈絡可以很短，彈窗要能獨立看懂 -->
+    <string name="dlg_jump_target">跳轉目的地</string>
+    <string name="dlg_jump_delay">跳轉延遲</string>
+    <string name="fmt_delay_sec">%1$s 秒</string>
+    <string name="hint_write_rate_limit">每秒最多寫入一次，連續點擊請間隔 1 秒以上。</string>
+    <string name="cd_collapse">收合</string>
+    <string name="cd_expand">展開</string>
+
+    <!-- 手動寫入結果 -->
+    <string name="msg_written">已寫入 %1$,d 步（涵蓋 %2$d 秒）</string>
+    <string name="msg_too_soon">距離上次寫入太近，請稍候一秒再按</string>
+    <string name="msg_hc_unavailable">Health Connect 不可用</string>
+    <string name="msg_no_permission">尚未取得寫入權限</string>
+    <string name="msg_failed">寫入失敗：%1$s</string>
+    <string name="msg_unknown_error">未知錯誤</string>
+
+    <!-- 寫入前確認 -->
+    <string name="confirm_title">確認寫入</string>
+    <string name="confirm_body">寫入 Health Connect 後無法從本 App 撤銷；不想每次確認，可在「其他設定」關閉。</string>
+
+    <!-- 數值彈窗 -->
+    <string name="dlg_rate_desc">設定每分鐘要寫入的步數。一般走路約 100、快走約 130。明顯異常的數據可能違反遊戲或平台的使用政策，請自行評估，後果自負。</string>
+    <string name="unit_rate">步/分</string>
+    <string name="dlg_interval_desc">建議設定每 %1$d 秒或每分鐘記錄即可，遊戲並非時時自動讀取 Health Connect 資料。（%1$d–3600 秒）</string>
+    <string name="unit_seconds">秒</string>
+    <string name="dlg_stride_desc">每一步的距離（0.30–1.50 公尺），用來一併寫入距離資料。成人平均約 0.72。</string>
+    <string name="unit_meters">公尺</string>
+    <string name="dlg_delay_desc">寫入成功後停留多久再切換 App。</string>
+
+    <!-- 語言 -->
+    <string name="dlg_language">介面語言</string>
+    <string name="lang_zh">繁體中文</string>
+    <string name="lang_en">English</string>
+
+    <!-- App 選擇器 -->
+    <string name="picker_search">搜尋</string>
+    <string name="picker_search_hint">App 名稱</string>
+    <string name="picker_loading">載入 App 清單中…</string>
+    <string name="picker_empty">找不到符合的 App</string>
+    <string name="picker_none">不返回</string>
+
+    <!-- 快捷分組 -->
+    <string name="cd_edit_group">編輯分組</string>
+    <string name="cd_sort_order">切換排序方向</string>
+    <string name="cd_add_group">新增分組</string>
+    <string name="dlg_group_title">編輯分組</string>
+    <string name="group_name_label">分組名稱</string>
+    <string name="group_name_hint">限 2 中文字或 4 英數</string>
+    <string name="group_order">分組順序</string>
+    <string name="group_move_left">◀ 往前</string>
+    <string name="group_move_right">往後 ▶</string>
+    <string name="group_steps_label">步數</string>
+    <string name="sort_asc">由小到大 ↑</string>
+    <string name="sort_desc">由大到小 ↓</string>
+    <string name="group_fill_hint">填幾個，外面就出現幾顆快捷鍵（最多 %1$d 個，留空的不算）。</string>
+    <string name="value_empty_hint">留空</string>
+    <string name="group_delete">刪除分組</string>
+    <string name="group_default_new">組%1$d</string>
+
+    <!-- 模式條 -->
+    <string name="mode_auto">自動</string>
+    <string name="mode_manual">手動</string>
+
+    <!-- 首次導覽 -->
+    <string name="ob_welcome_sub">忙碌的生活裡，\n用更有效率的方式累積步數。</string>
+    <string name="ob_modes_title">兩種寫入方式</string>
+    <string name="ob_mode_auto">自動模式</string>
+    <string name="ob_mode_auto_sub">設定速率與間隔，App 定時定額地寫入步數。</string>
+    <string name="ob_mode_manual">手動模式</string>
+    <string name="ob_mode_manual_sub">步數自由設定，一鍵立即寫入。</string>
+    <string name="ob_hc_title">連接 Health Connect</string>
+    <string name="ob_hc_granted">已取得寫入權限，可以開始使用了。</string>
+    <string name="ob_hc_sub">在授權頁把「步數」與「距離」允許寫入，\n就像下面示範的那樣。本 App 不讀取任何資料。</string>
+    <string name="ob_hc_card_title">允許 Treadless 寫入</string>
+    <string name="ob_perm_steps">步數</string>
+    <string name="ob_perm_distance">距離</string>
+    <string name="ob_perm_allowed">已允許</string>
+    <string name="ob_hc_grant_btn">前往 Health Connect 授權</string>
+    <string name="ob_notif_title">即時查看同步資訊</string>
+    <string name="ob_notif_granted">已允許通知，可即時查看寫入進度。</string>
+    <string name="ob_notif_sub">允許通知，自動模式時即時查看寫入進度與倒數。</string>
+    <string name="ob_notif_mock_title">Treadless · 寫入中</string>
+    <string name="ob_notif_mock_body">今日 3,000 步 · 42 秒後寫入</string>
+    <string name="ob_notif_stop">停止</string>
+    <string name="ob_notif_allow">允許通知</string>
+    <string name="ob_battery_title">寫入不被系統中斷</string>
+    <string name="ob_battery_done">電池用量已設為「不受限制」。</string>
+    <string name="ob_battery_sub">自動模式需要把電池用量設為「不受限制」。</string>
+    <string name="ob_battery_card">電池用量</string>
+    <string name="ob_battery_unrestricted">不受限制</string>
+    <string name="ob_battery_optimized">最佳化</string>
+    <string name="ob_battery_restricted">受限制</string>
+    <string name="ob_battery_btn">前往電池設定</string>
+    <string name="ob_start">開始使用</string>
+    <string name="ob_start_anyway">先開始使用</string>
+</resources>

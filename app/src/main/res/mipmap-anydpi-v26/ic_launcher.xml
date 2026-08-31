@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- minSdk 26，全部裝置都吃 adaptive icon，不需要另外備 PNG 點陣 fallback。
+     前景是滿版出血母檔（docs/brand-assets/treadless-app-icon-adaptive-v8.png）：母檔佔 108dp 畫布的
+     中央 75dp、四周用邊緣延伸補滿——這個比例讓星星與腳印避開遮罩裁切
+     （圓形/圓角方遮罩皆已模擬驗證）。 -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/ic_launcher_background" />
+    <foreground android:drawable="@mipmap/ic_launcher_fg" />
+    <monochrome android:drawable="@drawable/ic_launcher_monochrome" />
+</adaptive-icon>
