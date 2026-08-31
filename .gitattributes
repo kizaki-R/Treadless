@@ -1,0 +1,14 @@
+# 版控裡一律存 LF，簽出時由各自的 core.autocrlf 決定。
+# 沒有這個檔的話，Windows 貢獻者送出的 diff 會整份變成換行符差異。
+* text=auto eol=lf
+
+# Gradle wrapper 的批次檔在 Windows 必須是 CRLF
+*.bat text eol=crlf
+
+# 二進位：不要做任何換行轉換，也不要在 diff 裡展開
+*.png binary
+*.jpg binary
+*.webp binary
+*.jar binary
+*.apk binary
+*.jks binary
