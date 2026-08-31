@@ -16,7 +16,7 @@
 # Debug APK
 ./gradlew :app:assembleDebug
 
-# 單元測試（Health Connect 寫入分批與分組名稱截斷，21 條）
+# 單元測試（Health Connect 寫入分批與分組名稱截斷、舊格式遷移，26 條）
 ./gradlew :stepcore:testDebugUnitTest
 ```
 

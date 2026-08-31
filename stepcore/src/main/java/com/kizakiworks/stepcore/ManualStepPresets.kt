@@ -100,9 +100,19 @@ object ManualStepPresets {
 
     fun getGroups(context: Context): List<Group> {
         val p = prefs(context)
-        val raw = p.getString(KEY_GROUPS, null)
-        if (raw != null) {
-            val parsed = raw.split('|').mapNotNull { seg ->
+        return resolveGroups(p.getString(KEY_GROUPS, null), p.getString(KEY_LEGACY, null))
+    }
+
+    /**
+     * 決定要顯示哪些分組。**沒有有效存檔時一律回出廠六組**。
+     *
+     * 抽成純函式是因為這裡每一條分支都等於「使用者第一次開 App 會看到什麼」，
+     * 而 `allowBackup` 讓舊裝置的 prefs 會被還原到全新安裝上——分支不是理論情境，
+     * 實機真的會走到（踩過：新手機安裝後只看到一組）。每條都有測試釘住。
+     */
+    internal fun resolveGroups(rawGroups: String?, rawLegacy: String?): List<Group> {
+        if (rawGroups != null) {
+            val parsed = rawGroups.split('|').mapNotNull { seg ->
                 val sep = seg.indexOf(':')
                 if (sep < 0) return@mapNotNull null
                 val name = sanitizeName(seg.substring(0, sep)).ifBlank { DEFAULT_GROUP_NAME }
@@ -111,12 +121,26 @@ object ManualStepPresets {
                 )
                 if (steps.isEmpty()) null else Group(name, steps)
             }.take(MAX_GROUPS)
+            // 存過但一組都解不出來（格式壞掉／被截斷）也回出廠值，不要給空畫面
             return parsed.ifEmpty { DEFAULT }
         }
-        // 舊版扁平格式 → 單一「預設」組（不改寫儲存，下次 setGroups 自然轉新格式）
-        val legacy = p.getString(KEY_LEGACY, null) ?: return DEFAULT
-        val steps = cleanSteps(legacy.split(',').mapNotNull { it.trim().toIntOrNull() })
-        return if (steps.isEmpty()) DEFAULT else listOf(Group(DEFAULT_GROUP_NAME, steps))
+        // 舊版扁平格式（不改寫儲存，下次 setGroups 自然轉新格式）
+        if (rawLegacy != null) return fromLegacy(rawLegacy)
+        return DEFAULT
+    }
+
+    /**
+     * 舊版扁平格式 → 分組清單：舊數值進「預設」組，**其餘五組沿用出廠預設**。
+     *
+     * 【雷】這裡曾經只回傳單一「預設」組，結果全新安裝的使用者看到「只有一組」：
+     * `allowBackup` 開著、又沒有排除規則，Android 會把舊版 prefs 從雲端還原到
+     * 全新安裝上，於是走進這條 legacy 分支。使用者不知道有備份這回事，
+     * 只會覺得「這個 App 出廠就只有一組」。遷移一律用加法，不要取代。
+     */
+    internal fun fromLegacy(raw: String): List<Group> {
+        val steps = cleanSteps(raw.split(',').mapNotNull { it.trim().toIntOrNull() })
+        if (steps.isEmpty()) return DEFAULT
+        return listOf(Group(DEFAULT_GROUP_NAME, steps)) + DEFAULT.drop(1)
     }
 
     fun setGroups(context: Context, groups: List<Group>) {

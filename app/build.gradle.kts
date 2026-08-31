@@ -24,8 +24,8 @@ android {
         targetSdk = 36
         // 【雷】側載分發沒有商店把關版本，versionCode 只能往上加、不可重用，
         // 否則裝置會以「同版本」為由拒絕更新。
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
     }
 
     signingConfigs {
