@@ -1,167 +1,140 @@
 # Treadless
 
-**English** · [繁體中文](README.zh-TW.md)
+**繁體中文** · [English](README.en.md)
 
-Writes a chosen number of steps into Android **Health Connect** — on a schedule,
-or with a single tap.
+把設定好的步數，定時或按一下寫進 Android 的 **Health Connect**。
 
-**It requests no location permissions of any kind** and has nothing to do with
-GPS spoofing.
+**完全沒有任何定位權限**，和模擬 GPS 無關。
 
-| Onboarding | Auto mode |
+| 首次啟動導覽 | 手動模式 |
 |---|---|
-| <img src="docs/screenshots/onboarding-en.png" width="280"> | <img src="docs/screenshots/auto-mode.png" width="280"> |
+| <img src="docs/screenshots/onboarding.png" width="280"> | <img src="docs/screenshots/manual-mode.png" width="280"> |
 
 ---
 
-## What it is, and what it isn't
+## 這是什麼 / 不是什麼
 
-**It is** a record generator that writes steps — and optionally distance — into
-Health Connect. You set how many steps per minute and how often to write, and it
-does that; or you tap a preset amount in Manual mode.
+**是**：一支把步數（與可選的距離）寫進 Health Connect 的紀錄產生器。你決定
+每分鐘幾步、多久寫一次，它就照做；或是在手動模式按一下寫入指定的數量。
 
-**It isn't**:
+**不是**：
 
-- **Not GPS spoofing.** The app holds no location permissions and never touches
-  mock location. It writes `StepsRecord` and `DistanceRecord`, nothing else.
-- **Not a reader.** It requests write access only. It cannot see your health data.
+- **不是模擬 GPS**。這支 App 沒有任何定位權限，也不碰 mock location。
+  它只寫 Health Connect 的 `StepsRecord` 與 `DistanceRecord`。
+- **不讀取你的健康資料**。只申請寫入權限，沒有讀取權限。
 
-## ⚠️ Read this first
+## ⚠️ 使用前請讀
 
-What it writes are **real health records**. Every other app that reads Health
-Connect — fitness, insurance, games — will see them, and **Treadless cannot
-delete them**. Removing them means going into Health Connect's own data
-management screen.
+寫進 Health Connect 的是**真實的健康記錄**，其他讀取 Health Connect 的 App
+（健身、保險、遊戲）都會看到，而且**本 App 無法刪除已寫入的資料**——要刪得去
+Health Connect 自己的資料管理頁。
 
-Using this to feed any service that rewards step counts **may violate that
-service's terms of use**. The consequences, account action included, are yours to
-carry, and the more implausible your numbers the greater the risk. This tool
-makes no guarantees on that front.
+用它去餵任何以步數計算獎勵的服務，**可能違反該服務的使用條款**，後果（包含帳號
+處置）由你自己承擔。數值設得越離譜風險越高。這支工具不對此提供任何保證。
 
 ---
 
-## Features
+## 功能
 
-- **Auto mode** — set steps per minute and a write interval; a foreground service
-  writes on schedule. The ongoing notification shows the session total and a
-  countdown to the next write, with a stop button.
-- **Manual mode** — quick-step presets in **groups**: up to 6 groups (short
-  custom names, reorderable), each holding up to 5 values (deduplicated and
-  sorted on save; display order can be flipped). One tap writes.
-- **Confirm before writing** — on by default. These are real health records;
-  a stray tap costs more than an extra one.
-- **Open an app after writing** — optional, 0.5–3.0 s delay, with a built-in app
-  picker that shows icons.
-- **Today's total** — how much you have written today. Rolls over at midnight on
-  its own (by date comparison, no alarms, so it holds even if the app never
-  opened) and can be reset by hand.
-- **Write distance too** — optional. Converts steps using your stride length
-  (0.30–1.50 m) into a `DistanceRecord`.
-- **First-run walkthrough** — five pages: welcome (with language choice), the two
-  modes, Health Connect access, notifications, battery. The permission pages
-  animate what you need to do and poll to detect when it's done.
-- **Bilingual** — English and Traditional Chinese, switchable inside the app
-  (independent of your system language). The foreground-service notification
-  follows along.
+- **自動模式** — 設定「每分鐘步數」與「寫入間隔」，前景服務按時寫入。常駐通知
+  顯示本次累計與下次寫入倒數，可直接從通知停止。
+- **手動模式** — 快捷步數**分組制**：最多 6 組（自訂 4 半形位的短名、可排序），
+  每組最多 5 個數值（儲存時自動去重並由小到大，顯示方向可切換）。按一下寫入。
+- **寫入前確認** — 預設開啟。寫的是真實健康記錄，誤觸代價大於多按一下。
+- **寫完自動開啟指定 App** — 可選，延遲 0.5–3.0 秒，內建含圖示的 App 選擇器。
+- **今日累計** — 「今天寫了多少」，午夜自動歸零（比對日期，不用鬧鐘，App 沒開
+  也不會漏），可手動重置。
+- **同步寫入距離** — 可選。用步長（0.30–1.50 m）換算成 `DistanceRecord`。
+- **首次啟動導覽** — 五頁：歡迎（含語言選擇）／模式介紹／Health Connect 授權／
+  通知／電池。權限頁用會動的示意卡演示該怎麼操作，並輪詢偵測是否完成。
+- **雙語** — 繁體中文與 English，App 內即時切換（不跟隨系統語言），
+  前景服務通知也一起切。
 
-## Requirements
+## 需求
 
-| | |
+| 項目 | 版本 |
 |---|---|
-| Android | 8.0 (API 26) or newer |
-| [Health Connect](https://play.google.com/store/apps/details?id=com.google.android.apps.healthdata) | Required (built into Android 14 and newer) |
-| Refraction and lens effects on the glass UI | Android 13 (API 33) or newer; older versions fall back to plain translucent glass |
+| Android | 8.0（API 26）以上 |
+| [Health Connect](https://play.google.com/store/apps/details?id=com.google.android.apps.healthdata) | 需安裝（Android 14 以上為系統內建） |
+| 玻璃介面的折射與透鏡效果 | Android 13（API 33）以上；以下版本自動降級為半透明玻璃 |
 
-## Download and install
+## 下載與安裝
 
-1. Grab `app-release.apk` from [Releases](../../releases).
-2. Allow your browser or file manager to install unknown apps.
-3. Open it and follow the walkthrough to grant Health Connect **Steps** and
-   **Distance** write access.
+1. 從 [Releases](../../releases) 下載 `app-release.apk`。
+2. 允許你的瀏覽器或檔案管理員「安裝未知來源的應用程式」。
+3. 安裝後開啟，照導覽把 Health Connect 的**步數**與**距離**寫入權限打開。
 
-> **Updating**: later versions install straight over the top; your settings and
-> data are kept.
+> **更新**：後續版本直接覆蓋安裝即可，設定與資料都會保留。
 
 ---
 
-## How to use
+## 使用說明
 
-### First run
+### 首次啟動
 
-The first page of the walkthrough lets you pick the interface language (English
-or Traditional Chinese); it applies immediately. The next three pages walk you
-through Health Connect write access, notification permission, and setting battery
-usage to Unrestricted.
+導覽第一頁就能選介面語言（繁體中文／English），選了會立刻套用。後面三頁分別引導
+你開啟 Health Connect 寫入權限、通知權限、以及把電池用量設為「不受限制」。
 
-You can skip all three with "Maybe later" — the "Finish setup" card on the main
-screen keeps reminding you, and tapping an item jumps to the right settings page.
+三項都可以「稍後再說」跳過，主畫面的「尚待設定」卡片會持續提醒，點一下就跳到對應
+的設定頁。
 
-### Auto mode
+### 自動模式
 
-1. **Steps per minute** — how many steps a minute of writing represents. A
-   typical walking pace is about 100; brisk walking about 130.
-2. **Write interval** — how often to write (10–3600 s). The interval doesn't
-   change the total, only how many batches it arrives in.
-3. **Also write distance** — writes a `DistanceRecord` alongside. The gear icon
-   sets your stride length.
-4. Press **Start auto-writing**. The status row counts down to the next write,
-   and the ongoing notification mirrors it with a stop button.
+1. **每分鐘步數** — 一分鐘寫入幾步。一般走路約 100、快走約 130。
+2. **寫入間隔** — 多久寫一次（10–3600 秒）。間隔不影響總量，只影響「分幾次寫」。
+3. **同步寫入距離** — 開啟後同時寫 `DistanceRecord`，齒輪可調步長。
+4. 按 **開始自動寫入**。狀態列會顯示下次寫入倒數，常駐通知同步顯示並提供停止鈕。
 
-> For long sessions, set battery usage to Unrestricted — otherwise Android may
-> interrupt background writes.
+> 長時間掛機請把電池用量設為「不受限制」，否則系統可能中斷背景寫入。
 
-### Manual mode
+### 手動模式
 
-The group switcher sits on top; that group's preset values sit below it.
+上方是**分組切換鍵**，下方是該組的快捷數值。
 
-- Tap any value → (a confirmation appears by default) → it writes to Health Connect.
-- **✎ Edit** — rename the group (up to 4 half-width characters: 2 CJK or 4
-  alphanumeric), change values, reorder groups, delete a group. Blank value
-  fields are ignored.
-- **↑↓** — flip between low-to-high and high-to-low display order.
-- **＋** — add a group (6 maximum).
+- 點任一數值 →（預設會先跳確認）→ 寫入 Health Connect。
+- **✎ 編輯鍵** — 改組名（限 4 個半形位＝2 個中文字或 4 個英數）、改數值、
+  調整分組順序、刪除分組。空白的數值欄位會被忽略。
+- **↑↓ 鍵** — 切換數值由小到大或由大到小顯示。
+- **＋** — 新增分組（最多 6 組）。
 
-Writes are capped at one per second, so leave a beat between taps.
+寫入頻率上限為每秒一次，連點請間隔一秒。
 
-### Settings
+### 設定
 
-| | |
+| 項目 | 說明 |
 |---|---|
-| Confirm before writing | Shows the step count and asks for confirmation. On by default. |
-| Open app after writing | Opens a chosen app after a successful write, following the delay you set. |
-| Language | The 文A button, top left of the main screen. The app restarts itself to apply. |
-| Reset today's total | The ↻ beside the big number. It only clears this app's counter — **it does not delete anything already written to Health Connect**. |
+| 寫入前確認 | 顯示即將寫入的步數並要求確認。預設開啟。 |
+| 寫完自動開啟 App | 寫入成功後延遲指定秒數開啟指定 App。 |
+| 語言 | 主畫面左上角的「文A」鍵。切換後 App 會重建以套用。 |
+| 今日累計重置 | 主畫面數字右側的 ↻。只影響本 App 的計數，**不會刪除已寫入 Health Connect 的資料**。 |
 
-### Deleting what it wrote
+### 要刪掉寫進去的資料？
 
-Treadless has no delete function (and no read access). Open Health Connect →
-Data and access → Activity → Steps → Delete.
-
----
-
-## Known limitations
-
-- Default group names are stored in your data and **do not follow the interface
-  language**, so switching to English leaves the original names in place until
-  you rename them yourself.
-- With the screen off and unplugged, Doze can delay background writes. Set
-  battery usage to Unrestricted for long sessions.
-- The app cannot delete records it has written.
-
-## Reporting a problem
-
-Open an [issue](../../issues) with your Android version, device model, and either
-a screenshot or the steps that led to it.
+本 App 沒有刪除功能（也沒有讀取權限）。請開啟 Health Connect →
+資料和存取權 → 活動 → 步數 → 刪除。
 
 ---
 
-## License
+## 已知限制
 
-Apache License 2.0 — see [LICENSE](LICENSE).
+- 分組的預設名稱存在使用者資料裡，**不會隨介面語言切換**，
+  切成英文後仍是原本的名字，需要自行改名。
+- 螢幕關閉且未接電源時，系統的 Doze 可能延後背景寫入。長時間掛機請設定
+  電池用量為「不受限制」。
+- 本 App 不提供刪除已寫入資料的功能。
+
+## 回報問題
+
+請開 [Issue](../../issues)，附上 Android 版本、機型，以及發生問題時的畫面或步驟。
+
+---
+
+## 授權
+
+Apache License 2.0 — 見 [LICENSE](LICENSE)。
 
 Copyright 2026 Kizaki Works
 
-## Building from source
+## 從原始碼建置
 
-Toolchain, Gradle tasks, signing setup and module layout are in
-[docs/BUILDING.md](docs/BUILDING.md).
+建置環境、Gradle 指令、簽章設定與模組結構見 [docs/BUILDING.md](docs/BUILDING.md)。
