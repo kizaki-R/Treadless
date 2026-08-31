@@ -2,7 +2,6 @@
 
 把設定好的步數，定時或按一下寫進 **Health Connect** 的 Android 工具。
 
-Kotlin + Jetpack Compose + Material 3，介面用自製的 Liquid Glass（液態玻璃）元件。
 **完全沒有任何定位權限**，和模擬 GPS 無關。
 
 | 首次啟動導覽 | 自動模式 |
@@ -18,10 +17,9 @@ Kotlin + Jetpack Compose + Material 3，介面用自製的 Liquid Glass（液態
 
 **不是**：
 
-- **不是模擬 GPS**。這支 App 的 `AndroidManifest` 裡沒有任何定位權限，也不碰
-  mock location。它只寫 Health Connect 的 `StepsRecord` / `DistanceRecord`。
+- **不是模擬 GPS**。這支 App 沒有任何定位權限，也不碰 mock location。
+  它只寫 Health Connect 的 `StepsRecord` 與 `DistanceRecord`。
 - **不讀取你的健康資料**。只申請寫入權限，沒有讀取權限。
-- **不上架 Google Play**，側載（side-load）分發。
 
 ## ⚠️ 使用前請讀
 
@@ -56,16 +54,15 @@ Health Connect 自己的資料管理頁。
 |---|---|
 | Android | 8.0（API 26）以上 |
 | [Health Connect](https://play.google.com/store/apps/details?id=com.google.android.apps.healthdata) | 需安裝（Android 14 以上為系統內建） |
-| 液態玻璃的折射與透鏡效果 | Android 13（API 33）以上；以下版本自動降級為半透明玻璃 |
+| 玻璃介面的折射與透鏡效果 | Android 13（API 33）以上；以下版本自動降級為半透明玻璃 |
 
-## 安裝
+## 下載與安裝
 
 1. 從 [Releases](../../releases) 下載 `app-release.apk`。
 2. 允許你的瀏覽器或檔案管理員「安裝未知來源的應用程式」。
 3. 安裝後開啟，照導覽把 Health Connect 的**步數**與**距離**寫入權限打開。
 
-> **更新時**：只要是同一把金鑰簽的版本就能直接覆蓋安裝。若你自行從原始碼建置過
-> 又換了金鑰，必須先解除安裝（**App 內的設定會全部消失**）。
+> **更新**：後續版本直接覆蓋安裝即可，設定與資料都會保留。
 
 ---
 
@@ -92,7 +89,7 @@ Health Connect 自己的資料管理頁。
 
 上方是**分組切換鍵**，下方是該組的快捷數值。
 
-- 點任一數值 → （預設會先跳確認）→ 寫入 Health Connect。
+- 點任一數值 →（預設會先跳確認）→ 寫入 Health Connect。
 - **✎ 編輯鍵** — 改組名（限 4 個半形位＝2 個中文字或 4 個英數）、改數值、
   調整分組順序、刪除分組。空白的數值欄位會被忽略。
 - **↑↓ 鍵** — 切換數值由小到大或由大到小顯示。
@@ -116,68 +113,6 @@ Health Connect 自己的資料管理頁。
 
 ---
 
-## 建置
-
-需要 JDK 17（Android Studio 內建的 JBR 即可）與 Android SDK 36。
-
-```bash
-# Debug
-./gradlew :app:assembleDebug
-
-# 單元測試（Health Connect 寫入分批邏輯，21 條）
-./gradlew :stepcore:testDebugUnitTest
-```
-
-### Release 建置與簽章
-
-1. 產一把簽章金鑰：
-
-   ```bash
-   keytool -genkeypair -v -keystore <你的路徑>/treadless-release.jks \
-     -alias treadless -keyalg RSA -keysize 4096 -validity 10000
-   ```
-
-2. 把 `keystore.properties.example` 複製成 `keystore.properties`（專案根目錄）
-   並填入路徑與密碼。該檔已在 `.gitignore`，不會進版控。
-
-3. ```bash
-   ./gradlew :app:assembleRelease
-   ```
-
-   產出 `app/build/outputs/apk/release/app-release.apk`（開啟 R8，約 1.8 MB）。
-
-沒有 `keystore.properties` 也建得起來，只是會產出 `app-release-unsigned.apk`。
-
-> 發版時請保留 `app/build/outputs/mapping/release/mapping.txt` 並與 versionCode
-> 對應存檔，否則使用者回報的 crash 堆疊無法還原。
-
----
-
-## 專案結構
-
-| 模組 | 內容 |
-|---|---|
-| `:app` | 主畫面與首次啟動導覽（唯一的 Activity），UI 全部 Compose |
-| `:stepcore` | 步數引擎：Health Connect 寫入與分批、前景服務、偏好設定、語言切換。不依賴 Compose |
-| `:glassui` | Liquid Glass 共用元件：背景模糊玻璃面板、邊緣折射與 Fresnel 高光、藥丸滑動切換、內容透鏡 |
-
-主要依賴：Jetpack Compose（BOM 2024.12.01）、Material 3、
-[Haze](https://github.com/chrisbanes/haze) 1.7.2（即時背景模糊）、
-Health Connect client 1.1.0-rc02。
-
-### 幾個設計決策
-
-- **前景服務型別用 `specialUse`**：`dataSync` 在 Android 15 以上有 6 小時上限。
-- **今日累計不用 AlarmManager**：每次讀寫時比對 `epochDay` 順手翻頁，比排鬧鐘
-  可靠也省電，App 沒開也不會漏掉換日。
-- **寫入間隔下限 10 秒**：實測讀取端的輪詢週期，再短也沒有意義。
-- **語言不跟隨系統**：存在偏好設定裡，`attachBaseContext` 包裝 locale；前景服務
-  另外用同一份設定取通知字串。
-- **液態玻璃的 shader 是選配**：AGSL `RuntimeShader` 需要 API 33，以下版本走
-  降級路徑（裁切 + 高光層），仍然是好看的半透明玻璃。
-
----
-
 ## 已知限制
 
 - 分組的預設名稱（例如「預設」）存在使用者資料裡，**不會隨介面語言切換**，
@@ -186,20 +121,16 @@ Health Connect client 1.1.0-rc02。
   電池用量為「不受限制」。
 - 本 App 不提供刪除已寫入資料的功能。
 
----
+## 回報問題
 
-## License
-
-尚未指定授權條款，因此預設保留所有權利。若你想在自己的專案裡使用這裡的程式碼
-（特別是 `:glassui` 的液態玻璃元件），請先開 issue 詢問。
+請開 [Issue](../../issues)，附上 Android 版本、機型，以及發生問題時的畫面或步驟。
 
 ---
 
 ## English
 
 **Treadless** writes a chosen number of steps into Android **Health Connect** —
-either on a schedule (Auto mode) or with a single tap (Manual mode). Built with
-Kotlin, Jetpack Compose and Material 3, with a custom Liquid Glass UI kit.
+either on a schedule (Auto mode) or with a single tap (Manual mode).
 
 **It requests no location permissions of any kind** and has nothing to do with
 GPS spoofing. It only writes `StepsRecord` / `DistanceRecord`; it never reads
@@ -213,8 +144,18 @@ consequences, account action included, are yours to carry.
 
 Requires Android 8.0+ and the Health Connect app (built in on Android 14+).
 Refraction and lens effects need Android 13+; older versions fall back to a
-plain translucent glass look. Grab the APK from
-[Releases](../../releases), or build it yourself — see the build section above
-(the commands are the same; `keystore.properties.example` explains signing).
+plain translucent glass look. Grab the APK from [Releases](../../releases).
 
 The UI ships in Traditional Chinese and English, switchable inside the app.
+
+---
+
+## License
+
+Apache License 2.0 — 見 [LICENSE](LICENSE)。
+
+Copyright 2026 Kizaki Works
+
+## 從原始碼建置
+
+建置環境、Gradle 指令、簽章設定與模組結構見 [docs/BUILDING.md](docs/BUILDING.md)。
