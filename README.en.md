@@ -2,8 +2,8 @@
 
 [繁體中文](README.md) · **English**
 
-Writes a chosen number of steps into Android **Health Connect** — on a schedule,
-or with a single tap.
+Writes a chosen number of steps into Android **Health Connect**, either on a
+schedule or with a single tap.
 
 **It requests no location permissions of any kind** and has nothing to do with
 GPS spoofing.
@@ -14,55 +14,48 @@ GPS spoofing.
 
 ---
 
-## What it is, and what it isn't
+## What it doesn't do
 
-**It is** a record generator that writes steps — and optionally distance — into
-Health Connect. You set how many steps per minute and how often to write, and it
-does that; or you tap a preset amount in Manual mode.
+**No GPS spoofing.** The app holds no location permissions and never touches mock
+location. It writes `StepsRecord` and `DistanceRecord`, and nothing else.
 
-**It isn't**:
-
-- **Not GPS spoofing.** The app holds no location permissions and never touches
-  mock location. It writes `StepsRecord` and `DistanceRecord`, nothing else.
-- **Not a reader.** It requests write access only. It cannot see your health data.
+**No reading, either.** It asks for write access only, so it cannot see your
+health data.
 
 ## ⚠️ Read this first
 
 What it writes are **real health records**. Every other app that reads Health
-Connect — fitness, insurance, games — will see them, and **Treadless cannot
-delete them**. Removing them means going into Health Connect's own data
+Connect — fitness, insurance, games — can see them, and **Treadless cannot delete
+what it wrote**. Removing them means going into Health Connect's own data
 management screen.
 
-Using this to feed any service that rewards step counts **may violate that
-service's terms of use**. The consequences, account action included, are yours to
-carry, and the more implausible your numbers the greater the risk. This tool
-makes no guarantees on that front.
+Point this at a service that rewards step counts and you **may be breaking that
+service's terms of use**. The more implausible your numbers, the more obvious it
+is, and if the account gets actioned that's on you.
 
 ---
 
 ## Features
 
-- **Auto mode** — set steps per minute and a write interval; a foreground service
-  writes on schedule. The ongoing notification shows the session total and a
-  countdown to the next write, with a stop button.
-- **Manual mode** — quick-step presets in **groups**: up to 6 groups (short
-  custom names, reorderable), each holding up to 5 values (deduplicated and
-  sorted on save; display order can be flipped). One tap writes.
-- **Confirm before writing** — on by default. These are real health records;
-  a stray tap costs more than an extra one.
-- **Open an app after writing** — optional, 0.5–3.0 s delay, with a built-in app
-  picker that shows icons.
-- **Today's total** — how much you have written today. Rolls over at midnight on
-  its own (by date comparison, no alarms, so it holds even if the app never
-  opened) and can be reset by hand.
-- **Write distance too** — optional. Converts steps using your stride length
-  (0.30–1.50 m) into a `DistanceRecord`.
-- **First-run walkthrough** — five pages: welcome (with language choice), the two
-  modes, Health Connect access, notifications, battery. The permission pages
-  animate what you need to do and poll to detect when it's done.
-- **Bilingual** — English and Traditional Chinese, switchable inside the app
-  (independent of your system language). The foreground-service notification
-  follows along.
+Two ways to write. **Auto mode** takes a rate and an interval, then a foreground
+service writes on schedule; the ongoing notification shows the running total and
+a countdown, with a stop button on it. **Manual mode** lays your usual amounts out
+as buttons, one tap each.
+
+The rest:
+
+- Those buttons come in groups, up to 6 groups of 5 values, with names and order
+  you set yourself
+- A confirmation step before each write, on by default, and switchable off
+- Optionally opens an app of your choice 0.5–3.0 s after a successful write
+- Today's total rolls over at midnight without an alarm, so it holds even if the
+  app never opened
+- Writes distance alongside steps if you want, converted from your stride length
+  (0.30–1.50 m)
+- A five-page walkthrough on first run; the permission pages animate what you
+  need to tap
+- English and Traditional Chinese, switchable inside the app, foreground-service
+  notification included
 
 ## Requirements
 
@@ -79,8 +72,7 @@ makes no guarantees on that front.
 3. Open it and follow the walkthrough to grant Health Connect **Steps** and
    **Distance** write access.
 
-> **Updating**: later versions install straight over the top; your settings and
-> data are kept.
+Later versions install straight over the top; your settings and data are kept.
 
 ---
 
@@ -88,38 +80,37 @@ makes no guarantees on that front.
 
 ### First run
 
-The first page of the walkthrough lets you pick the interface language (English
-or Traditional Chinese); it applies immediately. The next three pages walk you
-through Health Connect write access, notification permission, and setting battery
-usage to Unrestricted.
+The first page lets you pick the interface language, and it applies right away.
+The next three cover Health Connect write access, notification permission, and
+setting battery usage to Unrestricted. The permission pages animate what you need
+to tap; go do it in system settings, come back, and the app notices on its own.
 
-You can skip all three with "Maybe later" — the "Finish setup" card on the main
+You can skip all three with "Maybe later". The "Finish setup" card on the main
 screen keeps reminding you, and tapping an item jumps to the right settings page.
 
 ### Auto mode
 
-1. **Steps per minute** — how many steps a minute of writing represents. A
-   typical walking pace is about 100; brisk walking about 130.
-2. **Write interval** — how often to write (10–3600 s). The interval doesn't
-   change the total, only how many batches it arrives in.
-3. **Also write distance** — writes a `DistanceRecord` alongside. The gear icon
+1. **Steps per minute**: how many steps each minute of writing is worth. A
+   typical walking pace is about 100, brisk walking about 130.
+2. **Write interval**: how often to write (10–3600 s). This doesn't change the
+   total, only how many batches it arrives in.
+3. **Also write distance**: writes a `DistanceRecord` alongside. The gear icon
    sets your stride length.
 4. Press **Start auto-writing**. The status row counts down to the next write,
    and the ongoing notification mirrors it with a stop button.
 
-> For long sessions, set battery usage to Unrestricted — otherwise Android may
-> interrupt background writes.
+For long sessions, set battery usage to Unrestricted, or Android may interrupt
+background writes.
 
 ### Manual mode
 
-The group switcher sits on top; that group's preset values sit below it.
+The group switcher sits on top, that group's values below it.
 
-- Tap any value → (a confirmation appears by default) → it writes to Health Connect.
-- **✎ Edit** — rename the group (up to 4 half-width characters: 2 CJK or 4
-  alphanumeric), change values, reorder groups, delete a group. Blank value
-  fields are ignored.
-- **↑↓** — flip between low-to-high and high-to-low display order.
-- **＋** — add a group (6 maximum).
+Tap any value to write it (a confirmation appears first, by default). **✎** opens
+the editor: rename the group (up to 4 half-width characters, so 2 CJK or 4
+alphanumeric), change values, reorder groups, delete one. Blank value fields are
+ignored. **↑↓** flips between low-to-high and high-to-low. **＋** adds a group, up
+to 6.
 
 Writes are capped at one per second, so leave a beat between taps.
 
@@ -130,23 +121,23 @@ Writes are capped at one per second, so leave a beat between taps.
 | Confirm before writing | Shows the step count and asks for confirmation. On by default. |
 | Open app after writing | Opens a chosen app after a successful write, following the delay you set. |
 | Language | The 文A button, top left of the main screen. The app restarts itself to apply. |
-| Reset today's total | The ↻ beside the big number. It only clears this app's counter — **it does not delete anything already written to Health Connect**. |
+| Reset today's total | The ↻ beside the big number. It only clears this app's counter, and **does not delete anything already written to Health Connect**. |
 
 ### Deleting what it wrote
 
-Treadless has no delete function (and no read access). Open Health Connect →
+Treadless has no delete function and no read access. Open Health Connect →
 Data and access → Activity → Steps → Delete.
 
 ---
 
 ## Known limitations
 
-- Default group names are stored in your data and **do not follow the interface
-  language**, so switching to English leaves the original names in place until
-  you rename them yourself.
-- With the screen off and unplugged, Doze can delay background writes. Set
-  battery usage to Unrestricted for long sessions.
-- The app cannot delete records it has written.
+Default group names are stored in your data and don't follow the interface
+language, so switching to English leaves the original names sitting there until
+you rename them.
+
+With the screen off and unplugged, Doze can delay background writes. Set battery
+usage to Unrestricted for long sessions.
 
 ## Reporting a problem
 
@@ -157,7 +148,7 @@ a screenshot or the steps that led to it.
 
 ## License
 
-Apache License 2.0 — see [LICENSE](LICENSE).
+Apache License 2.0, see [LICENSE](LICENSE).
 
 Copyright 2026 Kizaki Works
 
