@@ -134,6 +134,13 @@ Data and access → Activity → Steps → Delete.
 
 ## Known limitations
 
+Write too many steps at once and some apps reading Health Connect will ignore
+the record. A manual write covers at most 60 seconds, so tapping 10,000 claims
+ten thousand steps inside a minute. Google Fit did not count records like that
+in testing, though not every app is that strict — some take them. Auto mode
+avoids the problem by spreading steps at the rate you set: up to 600 a minute
+went through to Fit normally.
+
 Default group names are stored in your data and don't follow the interface
 language, so switching to English leaves the original names sitting there until
 you rename them.
