@@ -2,6 +2,8 @@
 
 [繁體中文](README.md) · **English**
 
+![Treadless](docs/social-preview.png)
+
 Writes a chosen number of steps into Android **Health Connect**, either on a
 schedule or with a single tap.
 

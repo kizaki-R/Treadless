@@ -2,6 +2,8 @@
 
 **繁體中文** · [English](README.en.md)
 
+![Treadless](docs/social-preview.png)
+
 把設定好的步數，定時或按一下寫進 Android 的 **Health Connect**。
 
 **完全沒有任何定位權限**，和模擬 GPS 無關。
